@@ -1,8 +1,8 @@
-INSERT INTO department (dept)
+INSERT INTO emp_department (dept)
 VALUES ("Head Management"), ("Secondary Management"), ("Cooks"), ("Prep/Dish");
 
 
-INSERT INTO roles (title, salary, department_id)
+INSERT INTO emp_role (title, salary, department_id)
 VALUES ("Head Chef", 65000, 1), 
         ("Sous Chef", 52000, 2),
          ("BOH Manager", 35000, 3),
@@ -10,12 +10,9 @@ VALUES ("Head Chef", 65000, 1),
          ("Line Cook", 25000, 4),
          ("Prep Cook", 260000, 4),
          ("Dishwasher", 170000, 4);
+         
 
-
-INSERT INTO employees (first_name, last_name, roles_id, manager_id)
-VALUES ("Kellen", "Andrea", 4, 1), ("Jimmy", "Grabel", 4,2);
-
-INSERT INTO employees (first_name, last_name, roles_id)
+INSERT INTO employee (first_name, last_name, roles_id)
 VALUES  ("Drew", "Ledo", 1),
         ("James", "Rocket", 1),
         ("Jessie", "Rocket", 4),

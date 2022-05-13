@@ -120,8 +120,61 @@ function addEmp () {
 }
 
 function updateRole () {
+    runPrompt = require('../index')
+
+    db.query("SELECT * FROM employee", (err, resultsEmp) => {
+        if (err) throw err;
+        const updateEmployeeRole = []
+        resultsEmp.forEach(({ first_name, last_name, id }) => {
+            updateEmployeeRole.push({
+                name: first_name + " " + last_name,    
+                value: id            
+            })
+        })
+    });        
     
-}
+
+    db.query("SELECT * FROM emp_role", (err, resultsRole) => {
+        if (err) throw err;
+        const updateRole = []
+        resultsRole.forEach(({ title, id }) => {
+            updateRole.push({
+                name: title,
+                value: id
+            })
+        })
+    });
+    
+    let questions = [
+        {
+            type: 'list',
+            name: 'updateEmployeeChoice',
+            message: "Which employee would you like to update?",
+            choices: updateEmployeeRole
+        },
+        {
+            type: 'list',
+            name: 'updateRoleChoice',
+            message: "Which role would you like to give the employee?",
+            choices: updateRole
+        },
+    ]
+
+    inquirer.prompt(questions)
+    .then(answer => {
+        const update = 'UPDATE employee SET ? WHERE ?? = ?';
+        db.query(update, [
+            {role_id: answer.updateRoleChoice},
+                "id", answer.updateEmployeeChoice                 
+            
+        ], (err, results) => {
+            if (err) throw err;
+            console.log('Employee role has been updated!')
+            runPrompt();
+        });
+    });
+};
+
 
 function finished () {
     console.log("Finished!")

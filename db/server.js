@@ -81,9 +81,10 @@ function addEmp () {}
 
 function updateRole () {}
 
-function finished () {}
-
-
-module.exports = {
-    allDepts, allRoles, allEmps, addDept, addRole, addEmp, updateRole, finished
+function finished () {
+    console.log("Finished!")
+    process.exit()
 }
+
+
+module.exports = { allDepts, allRoles, allEmps, addDept, addRole, addEmp, updateRole, finished }

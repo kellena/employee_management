@@ -77,9 +77,51 @@ function addRole() {
     })
 }
 
-function addEmp () {}
+function addEmp () {
+    runPrompt = require('../index')
+    db.query('SELECT * FROM employee INNER JOIN emp_role ON employee.role_id = emp_role.id GROUP BY emp_role.title', (err, res)=>{
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'empId',
+                message: 'What is the role of your new employee?',
+                choices: res.map(role=>role.title)
+            },
+            {
+                type: 'input',
+                name: 'firstName',
+                message: "What is your employee's first name?",
+            },
+            {
+                type: 'input',
+                name: "lastName",
+                message: "What is your employee's last name?"
+            },
+            {
+                type: 'list',
+                name: "empManager",
+                message: "Who is your employees manager?",
+                choices: res.map(role=>role.first_name + " " + role.last_name).slice(0,2)
+            },
 
-function updateRole () {}
+        ]).then(response=>{
+            const selectedTitle = res.find(role=>role.title === response.empId)
+            const selectedManager = res.find(role=>role.first_name + " " + role.last_name === response.empManager)
+            db.query('INSERT INTO employee SET ?', {
+                first_name: response.firstName,
+                last_name: response.lastName,
+                role_id: selectedTitle.id,
+                manager_id: selectedManager.manager_id
+            })
+            console.log('New employee added!')
+            runPrompt();
+        })
+    })
+}
+
+function updateRole () {
+    
+}
 
 function finished () {
     console.log("Finished!")

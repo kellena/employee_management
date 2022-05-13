@@ -11,9 +11,21 @@ function allDepts() {
     });
 }
 
-function allRoles() {}
+function allRoles() {
+    runPrompt = require('../index')
+    db.query('SELECT * FROM emp_role', function (err, results) {
+        console.table(results);
+        runPrompt();
+    });
+}
 
-function allEmps() {}
+function allEmps() {
+    runPrompt = require('../index')
+    db.query('SELECT * FROM employee', function (err, results) {
+        console.table(results);
+        runPrompt();
+    });
+}
 
 function addDept() {}
 

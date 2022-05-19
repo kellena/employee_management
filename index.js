@@ -8,7 +8,10 @@ db.connect(function(err){
     runPrompt()
 })
 
+let options = ["allDepts", "allRoles", "allEmps", "addDept", "addRole", "addEmp", "updateRole", "finished"]
+
 function runPrompt () {
+
     inquirer.prompt([
         {type:"list",
          name: "options",
@@ -16,35 +19,36 @@ function runPrompt () {
          choices: options
         },
     ])
-        .then ((answer) => {
-            console.log(answer);
-            switch (answer.options) {
-                case options[0]:
-                    allDepts();
-                    break;
-                case options[1]:
-                    allRoles();
-                    break;
-                case options[2]:
-                    allEmps();
-                    break;   
-                case options[3]:
-                    addDept();
-                    break;
-                case options[4]:
-                    addRole();
-                    break;
-                case options[5]:
-                    addEmp();
-                    break;
-                case options[6]:
-                    updateRole();
-                    break;
-                case options[7]:
-                    finished();
-                    break;
-            }
-        }) 
+
+    .then ((answer) => {
+        console.log(answer);
+        switch (answer.options) {
+            case options[0]:
+                allDepts();
+                break;
+            case options[1]:
+                allRoles();
+                break;
+            case options[2]:
+                allEmps();
+                break;   
+            case options[3]:
+                addDept();
+                break;
+            case options[4]:
+                addRole();
+                break;
+            case options[5]:
+                addEmp();
+                break;
+            case options[6]:
+                updateRole();
+                break;
+            case options[7]:
+                finished();
+                break;
+        }
+    }) 
 }
 
 

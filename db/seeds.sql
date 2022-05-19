@@ -1,4 +1,4 @@
-INSERT INTO emp_department (dept)
+INSERT INTO emp_department (name)
 VALUES ("Head Management"), ("Secondary Management"), ("Cooks"), ("Prep/Dish");
 
 
@@ -12,7 +12,7 @@ VALUES ("Head Chef", 65000, 1),
          ("Dishwasher", 170000, 4);
          
 
-INSERT INTO employee (first_name, last_name, roles_id)
+INSERT INTO employee (first_name, last_name, role_id)
 VALUES  ("Drew", "Ledo", 1),
         ("James", "Rocket", 1),
         ("Jessie", "Rocket", 4),

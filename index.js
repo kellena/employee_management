@@ -2,7 +2,9 @@ const inquirer = require ('inquirer');
 const db = require('./db/connection')
 
 require('dotenv').config();
+
 const { allDepts, allRoles, allEmps, addDept, addRole, addEmp, updateRole, finished} = require('./db/server')
+
 db.connect(function(err){
     if (err) throw err
     runPrompt()
@@ -13,15 +15,19 @@ let options = ["allDepts", "allRoles", "allEmps", "addDept", "addRole", "addEmp"
 function runPrompt () {
 
     inquirer.prompt([
+
         {type:"list",
          name: "options",
          message: "What would you like to do?",
          choices: options
         },
+
     ])
 
     .then ((answer) => {
+
         console.log(answer);
+
         switch (answer.options) {
             case options[0]:
                 allDepts();
@@ -47,8 +53,11 @@ function runPrompt () {
             case options[7]:
                 finished();
                 break;
+                
         }
+
     }) 
+
 }
 
 

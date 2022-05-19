@@ -105,18 +105,24 @@ function addEmp () {
             },
 
         ]).then(response=>{
+
             const selectedTitle = res.find(role=>role.title === response.empId)
             const selectedManager = res.find(role=>role.first_name + " " + role.last_name === response.empManager)
+
             db.query('INSERT INTO employee SET ?', {
                 first_name: response.firstName,
                 last_name: response.lastName,
                 role_id: selectedTitle.id,
                 manager_id: selectedManager.manager_id
             })
+
             console.log('New employee added!')
             runPrompt();
+
         })
+
     })
+    
 }
 
 function updateRole () {
